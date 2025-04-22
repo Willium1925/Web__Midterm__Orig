@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #d67575;
+}
+
+.header {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.header .title {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.header .description {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px; /* 按鈕間隙不變 */
+    margin-top: 15px;
+}
+
+button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 50px;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4d9772;
+}
+
+button.active {
+    background-color: #4d9772;
+    color: white;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* --- 修改：加大圖片間的間隙 --- */
+    gap: 25px; /* 例如，從 10px 增加到 25px */
+    margin: 20px;
+}
+
+.image-container {
+    width: 300px;        /* 固定寬度 */
+    height: 200px;       /* 固定高度 */
+    position: relative;
+    /* --- 修改：添加 overflow: hidden 來裁剪超出部分的圖片 --- */
+    overflow: hidden;
+    /* 移除 flex 相關屬性，因為 object-fit 會處理圖片填充和居中 */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* 保留圓角和陰影在容器上，這樣裁剪邊緣也是圓角 */
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+    /* 將 transition 移到容器上，如果希望容器本身有效果 */
+    transition: transform 0.3s, box-shadow 0.3s; /* 添加 box-shadow 的過渡效果 */
+    /* --- 修改：將白框應用在容器上 --- */
+    border: 2px solid white;
+}
+
+/* --- 修改：滑鼠懸停時放大整個容器 --- */
+.image-container:hover {
+    transform: scale(1.05); /* 稍微放大容器 */
+    box-shadow: none; /* 移除 hover 時的陰影效果，可以根據喜好調整 */
+}
+
+
+.image-container img {
+    /* --- 修改：讓圖片嘗試填滿容器 --- */
+    width: 100%;
+    height: 100%;
+    /* --- 修改：使用 object-fit: cover 來縮放/裁剪圖片 --- */
+    object-fit: cover; /* 保持比例填滿容器，多餘部分裁剪 */
+    /* 移除 max-width 和 max-height，因為現在要填滿 */
+    /* max-width: 100%; */
+    /* max-height: 100%; */
+
+    display: block; /* 好習慣 */
+    /* 邊框可以放在圖片上，也可以放在容器上，看想要的效果 */
+    /* border: 2px solid white; */
+    /* 圓角如果放在圖片上，且圖片被裁剪，可能不明顯，建議放容器上 */
+    /* border-radius: 10px; */
+    /* 陰影也建議放在容器上 */
+    /* box-shadow: 5px 5px 15px rgba(0,0,0,0.5); */
+
+    /* --- 修改：移除圖片的 hover 放大效果 --- */
+    transition: transform 0.3s; /* 保留 transition，但不再進行放大 */
+}
+
+/* --- 修改：移除圖片的 hover 放大效果 --- */
+.image-container img:hover {
+    transform: scale(1); /* 恢復原始大小 */
+    /* box-shadow: none; */ /* 陰影在容器上，圖片 hover 不影響容器陰影 */
+}
+
+
+.hover-time {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 12px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    display: none;
+    z-index: 10; /* 確保在圖片之上 */
+}
+
+.image-container:hover .hover-time {
+    display: block;
+}
